@@ -21,10 +21,38 @@ const enemigosBasicos = [
     new enemigo("Dragon", 20, 3),
 ];
 
+
 // Historia en alertas
 function historia() {
-    alert("Bienvenido al RPG de Texto, en este viaje usaremos la imaginacion para tratar de meternos en un mundo plagado de monstruos, lo ideal seria que nos conocieramos mejor antes de continuar..");
 
+    const arrayTextos = [
+        {
+            texto: 1,
+            codigo: "¿Podria decirme su nombre por favor?"
+        },
+        {
+            texto: 2,
+            codigo: "texto",
+        },
+    ]
+    
+
+    let textoCambiado = document.getElementById("textoCambiar");
+    
+    let principioTexto = 0;
+
+    textoCambiado.addEventListener("click", () =>{
+        if(principioTexto < arrayTextos.length) {
+            arrayTextos[principioTexto].codigo;
+            textoCambiado.innerHTML = arrayTextos[principioTexto].codigo
+            principioTexto++;
+        }
+        
+    });
+
+
+
+/*
     // Selecciona el nombre
 
     let nombrePj = prompt("¿Podria decirme su nombre por favor?");
@@ -39,16 +67,16 @@ function historia() {
     //Si no escribe nada repite hasta que lo haga
 
     while (nombrePj === "") {
-        alert("disculpa no te he oido bien..");
+        document.prompt("disculpa no te he oido bien..");
         nombrePj = prompt("¿Podria decirme su nombre por favor?");
     }
 
 
-    // Continua Historia en alerta
+    // Continua Historia en alert
 
-    alert("Excelente " + nombrePj + " mi nombre es Kaine no se si te haz enterado pero aqui han pasado muchas cosas, un Dragon ha estado atacando esta aldea y necesitamos de un valiente guerrero para que nos ayude a derrotarlo, actualmente no contamos con nadie que sepa utilzar un arma, pero veo que tu cargas una, quizas puedas ayudarnos derrotando unos slimes que se encuentran en el pueblo");
+    document.getElementById("textoCambiar").innerHTML("Excelente " + nombrePj + " mi nombre es Kaine no se si te haz enterado pero aqui han pasado muchas cosas, un Dragon ha estado atacando esta aldea y necesitamos de un valiente guerrero para que nos ayude a derrotarlo, actualmente no contamos con nadie que sepa utilzar un arma, pero veo que tu cargas una, quizas puedas ayudarnos derrotando unos slimes que se encuentran en el pueblo");
 
-    alert("Cuidado " + nombrePj + " Ahi viene un Slime...");
+    document.getElementById("textoCambiar").innerHTML("Cuidado " + nombrePj + " Ahi viene un Slime...");
 
     // Funcion de batalla la cual repetiremos a lo largo del codigo
  
@@ -58,7 +86,7 @@ function historia() {
         batallaSlime = prompt("Ahi viene un slime, ¿deseas atacar o defender?"); // pregunta de ataque o defensa ejecuta en base al switch
 
         while (batallaSlime === "") {
-            alert("Eso no es una accion"); // Ejecuta esta alerta siempre y cuando no se seleccione atacar o defender
+            document.getElementById("textoCambiar").innerHTML("Eso no es una accion"); // Ejecuta esta alerta siempre y cuando no se seleccione atacar o defender
             break;
         }
         for (hp = slime.hp; hp > 0; hp--) { // Recorre el For hasta acabar con la vida del enemigo
@@ -66,25 +94,25 @@ function historia() {
                 case "atacar": // Esto resta 1 de hp al Slime y al Personaje hasta llegar a 0 en este caso llegaria primero el slime
                     slime.hp = slime.hp - 1;
                     personaje.hp = personaje.hp - 1;
-                    alert("El HP del slime se ha reducido en 1, su HP actual es " + slime.hp);
-                    alert("El slime te ha atacado tu hp se ha reducido tu HP Actual es " + personaje.hp);
+                    document.getElementById("textoCambiar").innerHTML("El HP del slime se ha reducido en 1, su HP actual es " + slime.hp);
+                    document.getElementById("textoCambiar").innerHTML("El slime te ha atacado tu hp se ha reducido tu HP Actual es " + personaje.hp);
                     break;
                 case "defender": // Esto resta La mitad del daño y el slime no recibe daño
                     slime.hp = slime.hp - 0;
                     personaje.hp = personaje.hp - 0.5;
-                    alert("El slime te ha atacado tu hp se ha reducido tu HP Actual es " + personaje.hp);
+                    document.getElementById("textoCambiar").innerHTML("El slime te ha atacado tu hp se ha reducido tu HP Actual es " + personaje.hp);
                     break;
                 default: // Esto se asegura de que elejiste atacar o defender
                     slime.hp = slime.hp - 0;
                     personaje.hp = personaje.hp - 0;
-                    alert("Eso no es una accion");
+                    document.getElementById("textoCambiar").innerHTML("Eso no es una accion");
                     break;
             }
 
             // Si la vida del Slime llega a 0 se gana la batalla
 
             if (slime.hp === 0) {
-                alert("Excelente " + nombrePj + " Te curare la vida para que puedas continuar con tu camino, por favor derrota al dragon");
+                document.getElementById("textoCambiar").innerHTML("Excelente " + nombrePj + " Te curare la vida para que puedas continuar con tu camino, por favor derrota al dragon");
                 terminoBatalla = true;
                 personaje.ataque = personaje.ataque + 1;
 
@@ -93,14 +121,14 @@ function historia() {
             } else {
                 batallaSlime = prompt("¿deseas atacar o defender?"); // Repite la pregunta hasta llegar a O
                 while (batallaSlime === "") {
-                    alert("Eso no es una accion"); // Ejecuta esta alerta siempre y cuando no se seleccione atacar o defender
+                    document.getElementById("textoCambiar").innerHTML("Eso no es una accion"); // Ejecuta esta alerta siempre y cuando no se seleccione atacar o defender
                 }
             }
         }
     }
 
-
-    batalla(enemigosBasicos);
+/*
+   batalla(enemigosBasicos);
 
     alert("Cuidado " + nombrePj + " se acerca otro enemigo");
 
@@ -158,8 +186,9 @@ function historia() {
 
     }
 
-    batallaAleatoria(enemigosBasicos);
+    //batallaAleatoria(enemigosBasicos);
 
+    */
 }
 
 
