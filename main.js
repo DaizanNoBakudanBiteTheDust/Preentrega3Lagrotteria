@@ -36,6 +36,7 @@ function historia() {
         },
     ]
     
+    // Este Codigo de aqui hacia abajo cambia el texto al clickear sobre el mismo
 
     let textoCambiado = document.getElementById("textoCambiar");
     
