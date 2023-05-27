@@ -28,7 +28,7 @@ function historia() {
     const arrayTextos = [
         {
             texto: 1,
-            codigo: "¿Podria decirme su nombre por favor?"
+            codigo: "<p>¿Podria decirme su nombre por favor?</p>"
         },
         {
             texto: 2,
