@@ -22,7 +22,7 @@ const enemigosBasicos = [
 ];
 
 
-// Historia en alertas
+// Historia en alertas (Se agregan arrays los cuales seran necesarios en la historia)
 function historia() {
 
     const arrayTextos = [
@@ -36,21 +36,35 @@ function historia() {
         },
     ]
     
-    // Este Codigo de aqui hacia abajo cambia el texto al clickear sobre el mismo
+    // llama al ID y del DOM
 
     let textoCambiado = document.getElementById("textoCambiar");
     
+
+    // Este Codigo de aqui hacia abajo cambia el texto
+
     let principioTexto = 0;
 
-    textoCambiado.addEventListener("click", () =>{
+    function textoVariable() {
         if(principioTexto < arrayTextos.length) {
             arrayTextos[principioTexto].codigo;
             textoCambiado.innerHTML = arrayTextos[principioTexto].codigo
             principioTexto++;
         }
-        
-    });
+    };
 
+    // Este lo cambia al hacer click llamando la funcion arriba
+
+    textoCambiado.addEventListener("click", textoVariable);
+        
+    // evento para que se pueda apretar barra espaciadora aparte del click
+
+
+ window.addEventListener("keydown", (e) =>{
+        if(e.key === " ") {
+            textoVariable();
+        }
+    });
 
 
 /*
