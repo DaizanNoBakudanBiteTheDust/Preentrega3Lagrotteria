@@ -33,7 +33,7 @@ const personaje = {
     ataque: 1
 }
 
-// Historia en alertas (Se agregan arrays los cuales seran necesarios en la historia)
+// Historia en array (Se agregan arrays los cuales seran necesarios en la historia)
 function historia() {
 
     const arrayTextos = [{
@@ -59,9 +59,14 @@ function historia() {
 
   function seleccionarNombre() {
     formularioNombre = document.getElementById("nombrePersonaje");
-    const nombreGuardado = sessionStorage.getItem('nombrePj');
+    const nombreGuardado = JSON.stringify(sessionStorage.getItem('nombrePj', nombrePj));
     formularioNombre.addEventListener("submit", escucharForm);
+    nombrePj = nombreGuardado;
+    personaje.nombre = nombrePj;
+    
   }
+
+  // recibo valores del form
 
     let escucharForm = (e) => {
         e.preventDefault();
@@ -69,7 +74,6 @@ function historia() {
         let nombre = inputs[0].value; // llama el valor del form
         nombrePj = nombre;
         personaje.nombre = nombrePj;
-        console.log(nombrePj);
         sessionStorage.setItem('nombrePj', nombrePj);
         textoVariable();
     }
@@ -109,27 +113,32 @@ function historia() {
     let textoCambiado = document.getElementById("textoCambiar");
 
     let botonSubmit = textoCambiado.querySelector("input[type=submit]");
+   
     // Este Codigo de aqui hacia abajo cambia el texto
 
     let principioTexto = 0;
 
     function textoVariable() {
         if (principioTexto < arrayTextos.length) {
-            arrayTextos[principioTexto].codigo;
+            arrayTextos[principioTexto].codigo; // recorre el array de arriba
             textoCambiado.innerHTML = arrayTextos[principioTexto].codigo
             principioTexto++;
             console.log(principioTexto);
         };
         if (principioTexto === 2) {
-            removerFunciones();
+            removerFunciones(); // remueve eventos para que no se ejecuten en el form
             principioTexto === 3;
-            sessionStorage.removeItem('nombrePj');
+            // remuevo el storage para que al recargar no tome el anterior
             seleccionarNombre();
         } if (principioTexto === 3){
-            agregarFunciones();
-            sessionStorage.getItem('nombrePj');
+            agregarFunciones(); // los llamo de vuelta para que se ejecuten despues del form
+            // agrego un storage que recibe del form del array 2
+            sessionStorage.setItem('nombrePj', nombrePj);
+            sessionStorage.getItem('nombrePj', nombrePj);
+            if (sessionStorage.getItem('nombrePj') === null){
+               sessionStorage.getItem('nombrePj', nombrePj);
+            }
         }
-
     };
 
     agregarFunciones();
@@ -139,6 +148,5 @@ function historia() {
 // Cargo la funcion principal despues del html asi no me tira error al traer eventos del form
 
 document.addEventListener("DOMContentLoaded", function () {
-    sessionStorage.removeItem('nombrePj');
     historia()
 });
