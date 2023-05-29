@@ -25,7 +25,7 @@ const enemigosBasicos = [
 // declaro el personaje
 
 
-let nombrePj = sessionStorage.getItem('nombrePj');
+let nombrePj;
 
 const personaje = {
     nombre: nombrePj,
@@ -42,7 +42,7 @@ function historia() {
         },
         {
             texto: 2,
-            codigo: '<form id="nombrePersonaje"><input type="text"> <input type="submit" value="enviar"></form>',
+            codigo: '<form id="nombrePersonaje"><input type="text"> <input type="submit" onClick="" value="enviar"></form>',
         }, {
             texto: 3,
             codigo: `<p>Excelente ${nombrePj} mi nombre es Kaine no se si te haz enterado pero aquí han pasado muchas cosas, un Dragón ha estado atacando esta aldea y necesitamos de un valiente guerrero para que nos ayude a derrotarlo, actualmente no contamos con nadie que sepa utilizar un arma, pero veo que tú cargas una, quizás puedas ayudarnos derrotando unos slimes que se encuentran en el pueblo</p>`,
@@ -57,16 +57,12 @@ function historia() {
 
     let formularioNombre;
 
-  function seleccionarNombre() {
-    formularioNombre = document.getElementById("nombrePersonaje");
-    const nombreGuardado = JSON.stringify(sessionStorage.getItem('nombrePj', nombrePj));
-    formularioNombre.addEventListener("submit", escucharForm);
-    nombrePj = nombreGuardado;
-    personaje.nombre = nombrePj;
-    
-  }
+    function seleccionarNombre() {
+        formularioNombre = document.getElementById("nombrePersonaje");
+        formularioNombre.addEventListener("submit", escucharForm);
+    }
 
-  // recibo valores del form
+    // recibo valores del form
 
     let escucharForm = (e) => {
         e.preventDefault();
@@ -112,8 +108,6 @@ function historia() {
 
     let textoCambiado = document.getElementById("textoCambiar");
 
-    let botonSubmit = textoCambiado.querySelector("input[type=submit]");
-   
     // Este Codigo de aqui hacia abajo cambia el texto
 
     let principioTexto = 0;
@@ -130,19 +124,19 @@ function historia() {
             principioTexto === 3;
             // remuevo el storage para que al recargar no tome el anterior
             seleccionarNombre();
-        } if (principioTexto === 3){
+        }
+        if (principioTexto === 3) {
             agregarFunciones(); // los llamo de vuelta para que se ejecuten despues del form
             // agrego un storage que recibe del form del array 2
-            sessionStorage.setItem('nombrePj', nombrePj);
-            sessionStorage.getItem('nombrePj', nombrePj);
-            if (sessionStorage.getItem('nombrePj') === null){
-               sessionStorage.getItem('nombrePj', nombrePj);
-            }
+            nombrePj = sessionStorage.getItem('nombrePj');
+            personaje.nombre = nombrePj;
+            textoCambiado.innerHTML = `<p>Excelente ${nombrePj} mi nombre es Kaine no se si te haz enterado pero aquí han pasado muchas cosas, un Dragón ha estado atacando esta aldea y necesitamos de un valiente guerrero para que nos ayude a derrotarlo, actualmente no contamos con nadie que sepa utilizar un arma, pero veo que tú cargas una, quizás puedas ayudarnos derrotando unos slimes que se encuentran en el pueblo</p>`;
+            principioTexto++;
         }
     };
 
     agregarFunciones();
-    
+
 };
 
 // Cargo la funcion principal despues del html asi no me tira error al traer eventos del form
