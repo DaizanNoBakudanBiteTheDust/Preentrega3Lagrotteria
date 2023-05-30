@@ -24,7 +24,6 @@ const enemigosBasicos = [
 
 // declaro el personaje
 
-
 const personaje = {
     nombre: nombrePj,
     hp: 100,
@@ -34,8 +33,8 @@ const personaje = {
 // Historia en array (Se agregan arrays los cuales seran necesarios en la historia)
 function historia() {
 
-
     // funcion que Selecciona el nombre
+    let nombrePj;
 
     let formularioNombre;
 
@@ -48,11 +47,11 @@ function historia() {
 
     let escucharForm = (e) => {
         e.preventDefault();
-        inputs = formularioNombre.children;
-        let nombre = inputs[0].value; // llama el valor del form
-        nombrePj = nombre;
-        personaje.nombre = nombrePj;
-        sessionStorage.setItem('nombrePj', nombrePj);
+        nombrePersonaje = document.getElementById("nombrePersonajePrincipal");
+        let nombre = nombrePersonaje.value; // llama el valor del form
+        sessionStorage.setItem('nombrePj', JSON.stringify(nombre));
+        let obtenerNombre = JSON.parse(sessionStorage.getItem('nombrePj'));
+        nombrePj = obtenerNombre;
         textoVariable();
     }
 
@@ -92,11 +91,12 @@ function historia() {
 
     // Este Codigo de aqui hacia abajo cambia el texto
 
-    let textos = JSON.parse(localStorage.getItem('textos'));
-    
     let principioTexto = 0;
 
     function textoVariable() {
+        let textos = JSON.parse(localStorage.getItem('textos'));
+        console.log(nombrePj);
+
         if (principioTexto < textos.length) {
             textos[principioTexto].codigo; // recorre el array de arriba
             textoCambiado.innerHTML = textos[principioTexto].codigo
@@ -105,16 +105,16 @@ function historia() {
         };
         if (principioTexto === 2) {
             removerFunciones(); // remueve eventos para que no se ejecuten en el form
-            principioTexto === 3;
             // remuevo el storage para que al recargar no tome el anterior
             seleccionarNombre();
+            
         }
         if (principioTexto === 3) {
+            dameElNombre = document.getElementById("nombreNombre");
+        dameElNombre.innerHTML = nombrePj;
             agregarFunciones(); // los llamo de vuelta para que se ejecuten despues del form
             // agrego un storage que recibe del form del array 2
-            nombrePj = sessionStorage.getItem('nombrePj');
-            personaje.nombre = nombrePj;
-            textoCambiado.innerHTML = `<p>Excelente ${nombrePj} mi nombre es Kaine no se si te haz enterado pero aquí han pasado muchas cosas, un Dragón ha estado atacando esta aldea y necesitamos de un valiente guerrero para que nos ayude a derrotarlo, actualmente no contamos con nadie que sepa utilizar un arma, pero veo que tú cargas una, quizás puedas ayudarnos derrotando unos slimes que se encuentran en el pueblo</p>`;
+            principioTexto === 4;
             principioTexto++;
         }
     };
