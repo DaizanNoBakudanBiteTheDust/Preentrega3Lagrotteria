@@ -94,28 +94,24 @@ function historia() {
     let principioTexto = 0;
 
     function textoVariable() {
-        let textos = JSON.parse(localStorage.getItem('textos'));
-        console.log(nombrePj);
+        let textos = JSON.parse(localStorage.getItem('textos')); // llamo los textos via local storage
 
         if (principioTexto < textos.length) {
-            textos[principioTexto].codigo; // recorre el array de arriba
+            textos[principioTexto].codigo; // recorre el array de local storage
             textoCambiado.innerHTML = textos[principioTexto].codigo
-            principioTexto++;
-            console.log(principioTexto);
-        };
-        if (principioTexto === 2) {
-            removerFunciones(); // remueve eventos para que no se ejecuten en el form
-            // remuevo el storage para que al recargar no tome el anterior
+            principioTexto++; 
+        }if (principioTexto === 2) {
+         // remueve eventos para que no se ejecuten en el form
+         removerFunciones();
             seleccionarNombre();
-            
-        }
-        if (principioTexto === 3) {
-            dameElNombre = document.getElementById("nombreNombre");
-        dameElNombre.innerHTML = nombrePj;
-            agregarFunciones(); // los llamo de vuelta para que se ejecuten despues del form
+
+        }else if (principioTexto === 3) {
+            agregarFunciones();
+            dameElNombre = document.querySelector("#textoCambiar p span"); // llama la ubicacion del span
+            dameElNombre.innerHTML = nombrePj; // cambia el span por el valor asignado a nombrePj desde el session storage
             // agrego un storage que recibe del form del array 2
-            principioTexto === 4;
             principioTexto++;
+            
         }
     };
 
@@ -125,6 +121,6 @@ function historia() {
 
 // Cargo la funcion principal despues del html asi no me tira error al traer eventos del form
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     historia();
-  });
+});
